@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <form method="POST" action="{{ route('register') }}">
+    {{-- <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <div class="row mb-3">
@@ -76,29 +76,55 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
     <div class="site-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="h4 text-black widget-title mb-3">Register</h3>
-                    <form action="{{ route('register') }}" class="form-contact-agent">
+                    <form action="{{ route('register') }}" method="POST" class="form-contact-agent">
                         @csrf
                         <div class="form-group">
-                            <label for="email">Username</label>
-                            <input type="username" id="username" class="form-control">
+                            <label for="email">Name</label>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required autocomplete="email">
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" class="form-control">
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="new-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+
                         <div class="form-group">
-                            <input type="submit" id="phone" class="btn btn-primary" value="Register">
+                            <label for="password">Confirm Password</label>
+                            <input id="password-confirm" type="password" class="form-control"
+                                name="password_confirmation" required autocomplete="new-password">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="phone" class="btn btn-primary" value="Register">
                         </div>
                     </form>
                 </div>
